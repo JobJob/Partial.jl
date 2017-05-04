@@ -1,3 +1,5 @@
+module Partial
+
 export @p, @partial
 """
 Converts an expression containing N placeholder underscores, to an anonymous function
@@ -54,3 +56,5 @@ maybe_replace(subexpr, symreg, replacement, i) = begin
   end
   return subexpr, i #unchanged, i.e. maybe_not
 end
+
+end # module
