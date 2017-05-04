@@ -1,32 +1,53 @@
 ## Yet Another Partial Macro
 
-Mine uses underscores - boring
+### What
+
+Create anonymous functions with fewer key strokes
+
+### Why
+
+There are other packages that do basically the same thing (and more), but I remember how to use mine, and I have multiple and numbered arguments, which others maybe don't.
+
+### Install
+
+Unregistered for now.
+`Pkg.clone("https://github.com/JobJob/Partial.jl.git")`
+
+### Usage
+
+Create functions whose arguments will replace the underscores.
 
 e.g.
 ```
+# setup
+using Partial
 type Person
     name
-    age
+    weight
 end
 N = 10
-people = [Person("Fred $i", rand(0:100)) for i in 1:N]
-ages = map((@p _.age), people)
+people = [Person("Fred $i", rand(0:500)) for i in 1:N]
+
+# magic
+ages = map(@p(_.weight), people) # equiv of map(prsn->prsn.weight, people)
 ```
 ```
 10-element Array{Int64,1}:
- 78
- 15
- 87
- 92
- 71
- 90
- 61
- 69
- 93
- 52
+ 433
+ 432
+  85
+ 205
+ 301
+  87
+ 385
+ 476
+  12
+ 125
 ```
+Even though it doesn't look that useful in the above example, in some cases it actually is.
 
-and you can number the underscores
+
+You can also number the underscores
 
 ```
 channels = 4
