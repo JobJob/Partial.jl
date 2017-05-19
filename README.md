@@ -4,9 +4,15 @@
 
 Create anonymous functions with fewer key strokes
 
+```
+sextupler = @p 6_
+sextupler(5)
+30
+```
+
 ### Why
 
-There are other packages that do basically the same thing (and more), but I remember how to use mine, and I have multiple and numbered arguments, which others maybe don't.
+There are other packages that do basically the same thing (and more), but I remember how to use mine, and this package supports multiple and numbered arguments, which others maybe don't.
 
 ### Install
 
@@ -47,7 +53,7 @@ ages = map(@p(_.weight), people) # equiv of map(prsn->prsn.weight, people)
 Even though it doesn't look that useful in the above example, in some cases it actually is.
 
 
-You can also number the underscores
+You can also number the underscores/arguments
 
 ```
 channels = 4
