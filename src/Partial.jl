@@ -44,7 +44,7 @@ replace_sym!(expr::Expr, symstr::AbstractString, replacement, i=1) = begin
 end
 
 maybe_replace(subexpr, symreg, replacement, i) = begin
-  if typeof(subexpr) == Symbol && ismatch(symreg, string(subexpr))
+  if typeof(subexpr) == Symbol && occursin(symreg, string(subexpr))
     m = match(symreg, string(subexpr))
     if length(m.captures[1]) > 0
       #subexpr is e.g. _1 or _3
