@@ -23,14 +23,18 @@ e.g.
 ```
 """
 
-macro p(fexpr)
-  esc(:(@partial($fexpr)))
+macro p(fbodies...)
+  partial_apply(fbodies)
 end
 
-macro partial(fexpr::Expr)
-  replace_sym!(fexpr, "_", :(pfargs))
-  res = esc(:((pfargs...)->$fexpr))
-  res
+macro partial(fbodies...)
+  partial_apply(fbodies)
+end
+
+function partial_apply(fbodies)
+  foreach(fexpr->replace_sym!(fexpr, "_", :pfargs), fbodies)
+  fexprs = map(fbody->esc(:((pfargs...)->$fbody)), fbodies)
+  return foldl((cur,f)->:($cur ∘ $f), reverse(fexprs))
 end
 
 replace_sym!(expr::Expr, symstr::AbstractString, replacement, i=1) = begin
